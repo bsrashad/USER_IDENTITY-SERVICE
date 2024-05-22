@@ -1,0 +1,31 @@
+spring:
+  application:
+    name: user-service-testing
+  datasource:
+    url: jdbc:mysql://localhost:3306/jwts
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    generate-ddl: true
+    properties:
+      hibernate:
+        format_sql: true
+    database: mysql
+
+server:
+  port: 4325
+
+application:
+  security:
+    jwt:
+      secret-key: 404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970
+      expiration: 36000000 # 10 hour
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://172.18.5.20:8761/eureka
