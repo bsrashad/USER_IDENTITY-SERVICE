@@ -79,16 +79,16 @@ public class AuthenticationService {
         // Generate JWT token for the user
         var jwtToken = jwtService.generateToken(user);
 
-    // String verificationUrl = "http://localhost:4321/api/v1/auth/verifyEmailToken?token=" + jwtToken;
-    // emailService.sendEmail(request.getEmail(),"email verification", verificationUrl);
-    // System.out.println("-------------------"+verificationUrl);
+    String verificationUrl = "http://localhost:4321/api/v1/auth/verifyEmailToken?token=" + jwtToken;
+    emailService.sendEmail(request.getEmail(),"email verification", verificationUrl);
+    System.out.println("-------------------"+verificationUrl);
         // Save the user's token in the repository
 //        saveUserToken(savedUser, jwtToken);
 
         // Return the authentication response containing the token
         return AuthenticationResponse.builder()
             
-            .message("Registration successful ")
+            .message("Registration successful but email has to be verified ")
             .build();
     }
     private void executeBatchScript(Long userId, String jwtToken) {
@@ -201,21 +201,21 @@ public class AuthenticationService {
             .message(message)
             .build();
     }
-    // public ResponseEntity<String> verifyEmailToken( String token) {
-    //     System.out.println("+++++++######++++++++"+token);
-    // if(!jwtService.isTokenExpired(token)){
-    //   String email=jwtService.extractUsername(token);
-    //   User user = repository.findByEmail(email)
-    //         .orElseThrow();
-    //         user.setEmailVerified(true);
-    //         repository.save(user);
+    public ResponseEntity<String> verifyEmailToken( String token) {
+        System.out.println("+++++++######++++++++"+token);
+    if(!jwtService.isTokenExpired(token)){
+      String email=jwtService.extractUsername(token);
+      User user = repository.findByEmail(email)
+            .orElseThrow();
+            user.setEmailVerified(true);
+            repository.save(user);
       
-    //     return ResponseEntity.ok("Email verified successfully");
-    // }
-    // return ResponseEntity.badRequest().body("Invalid token or user already verified");
+        return ResponseEntity.ok("Email verified successfully");
+    }
+    return ResponseEntity.badRequest().body("Invalid token or user already verified");
     
         
-    // }
+    }
 
     // public ResponseEntity<String> forgotPassword(EmailRequest emails,HttpServletResponse response) {
     //     System.out.println("$$$$$$$$$$"+emails.getEmail());

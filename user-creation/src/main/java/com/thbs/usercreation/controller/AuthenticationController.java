@@ -72,12 +72,12 @@ public class AuthenticationController {
     }
   }
 
-//   @GetMapping("/verifyEmailToken")
-// public ResponseEntity<String> verifyEmailToken(@RequestParam("token") String token) {
-//     return service.verifyEmailToken(token);
+  @GetMapping("/verifyEmailToken")
+public ResponseEntity<String> verifyEmailToken(@RequestParam("token") String token) {
+    return service.verifyEmailToken(token);
 
     
-// }
+}
 
 @PostMapping("/forgotpassword")
 public ResponseEntity<AuthenticationResponse> forgotPassword(@RequestBody EmailRequest emails) {
