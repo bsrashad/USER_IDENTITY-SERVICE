@@ -18,7 +18,7 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
-      - "4321:4321"
+      - "4325:4325"
     depends_on:
       - mysql
     environment:
