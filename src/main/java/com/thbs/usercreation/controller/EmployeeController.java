@@ -15,7 +15,7 @@ public class EmployeeController {
     public ResponseEntity<Map<String, String>> getEmployeeToken(@RequestBody String empid) {
         try {
             // Run the Python script with the employee ID
-            ProcessBuilder pb = new ProcessBuilder("python", "path/to/WriteTokenS3.py", empid);
+            ProcessBuilder pb = new ProcessBuilder("python", "scripts/WriteTokenS3.py", empid);
             Process process = pb.start();
 
             // Read the standard output
